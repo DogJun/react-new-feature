@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, Component } from 'react'
 import { useFetch } from 'react-hooks-fetch'
 import './suspense.css'
-const LazyComp = lazy(() => import('./lazy'))
+const LazyComp = lazy(() => import(/*webpackChunkName: "lazy"*/'./lazy'))
 
 // function fetchApi () {
 //   const promise = new Promise(resolve => {
@@ -43,9 +43,34 @@ function SuspenseComp() {
   return <span>RemoteData: {data.title}</span> 
 }
 
-export default () => (
-  <Suspense fallback={<div className="text-danger">loading<i></i></div>}>
-    <LazyComp />
-    <SuspenseComp />
-  </Suspense>
-)
+export default class App extends Component {
+  state = {
+    hasError: false
+  }
+  // 捕获加载lazy异常
+  // 第一种写法
+  // componentDidCatch () {
+  //   this.setState({
+  //     hasError: true
+  //   })
+  // }
+  // 第二种写法
+  static getDerivedStateFromError () {
+    return {
+      hasError: true
+    }
+  }
+  render () {
+    if (this.state.hasError) {
+      return <div>error</div>
+    }
+    return (
+      <>
+        <Suspense fallback={<div className="text-danger">loading<i></i></div>}>
+          <LazyComp />
+          <SuspenseComp /> 
+        </Suspense>
+      </>
+    )
+  }
+}

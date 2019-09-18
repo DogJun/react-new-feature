@@ -1,9 +1,10 @@
 // context 主要是解决props向多层嵌套的子组件传递的问题，原理是定义了一个全局对象
+// context 可以有多个，对应的Provider, Consumer需要嵌套，顺序不重要
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const { Provider, Consumer } = React.createContext('default')
-
+// 'default' 为默认值
+const defaultContext = React.createContext('default')
+const { Provider, Consumer } = defaultContext
 class Parent extends React.Component {
   state = {
     name: 'DogJun',
@@ -50,21 +51,16 @@ function Child (props, context) {
 }
 
 class Child2 extends React.Component {
-  static contextTypes = {
-    name: PropTypes.string
-  }
+  // React 16.6引入了在不直接使用Consumer组件的情况下从上下文消费数据的功能
+  // 推荐这种写法，更加简洁
+  static contextType = defaultContext
   render () {
+    // const value = this.context
+    const { name } = this.context
     return (
-      <Consumer>
-        {
-          value => <p className="text-info">子节点 => yideng: {value.name}</p>
-        }
-      </Consumer>
+      <p className="text-info">子节点 => yideng: {name}</p>
     )
   }
-}
-Child.contextTypes = {
-  value: PropTypes.string
 }
 
 export default () => (
