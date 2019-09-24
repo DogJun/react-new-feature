@@ -58,7 +58,7 @@ class Child2 extends React.Component {
     // const value = this.context
     const { name } = this.context
     return (
-      <p className="text-info">子节点 => yideng: {name}</p>
+      <p className="text-info">子节点 => myname: {name}</p>
     )
   }
 }

@@ -10,6 +10,7 @@ const Counter = memo(props => {
 // }
 export default function App () {
   const [count, setCount] = useState(0)
+  const [clickCount, setClickCount] = useState(0)
   // const onClick = () => {
   //   console.log('click')
   // }
@@ -18,12 +19,15 @@ export default function App () {
   //     console.log('click')
   //   }
   // }, [])
+  // useMemo(() => fn) 等价于 useCallback(fn) 
   const onClick = useCallback(() => {
     console.log('click')
+    setClickCount((clickCount) => clickCount + 1);
   }, [])
   return (
     <>
       <span>{count}</span>
+      <span>{clickCount}</span>
       <input
         type="button"
         onClick={() => setCount(count + 1)}

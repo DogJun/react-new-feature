@@ -1,3 +1,6 @@
+// ref 两种使用场景
+// 1. 获取dom或者组件
+// 2. 共享不同次渲染中的数据
 import React, {
   forwardRef,
   useEffect,
