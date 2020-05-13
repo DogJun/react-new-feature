@@ -44,6 +44,9 @@ class App extends Component {
             <Link to="/hookdemo">React Hooks</Link>
           </li>
           <li>
+            <Link to="/setStateDemo">setState</Link>
+          </li>
+          <li>
             <Link to="/fiberdemo">React Fiber</Link>
           </li>
         </ul>

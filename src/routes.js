@@ -24,6 +24,8 @@ import ErrorDemo from './demos/error';
 import LifecycleDemo from './demos/lifecycle';
 //react hooks
 import HookDemo from './demos/hooks/ref/index';
+// setState
+import setStateDemo from './demos/setState/index';
 // //react fiber
 // import FiberDemo from './demos/fiber';
 //react-call-return 父组件根据子组件的回调
@@ -42,6 +44,7 @@ export default (
     <Route path="/errdemo" component={ErrorDemo} />
     <Route path="/lifecycledemo" component={LifecycleDemo} />
     <Route path="/hookdemo" component={HookDemo} />
+    <Route path="/setStateDemo" component={setStateDemo} />
     {/*<Route path="/fiberdemo" component={FiberDemo} /> */}
   </>
 )
